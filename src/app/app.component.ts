@@ -6,5 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'tarefa_todo';
+  tarefas = [
+    { descricao: 'Dashboard BI', concluida: true },
+    { descricao: 'Apresentação MPN', concluida: false },
+    { descricao: 'Tarefa calculadora', concluida: false },
+    { descricao: 'Tarefa tela de login', concluida: true },
+    { descricao: 'Tarefa conta bancária', concluida: false }
+  ];
+
+  checkTarefa(tarefa: { concluida: boolean; }) {
+    tarefa.concluida = !tarefa.concluida;
+  }
 }
