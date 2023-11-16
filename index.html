@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercícios em HTML, CSS e JavaScript</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    section {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <h2>1. Operações com Variáveis</h2>
+    <button onclick="operacoesVariaveis()">Calcular</button>
+  </section>
+
+  <section>
+    <h2>2. Loop de 10 a 100</h2>
+    <button onclick="loopDezACem()">Mostrar Loop</button>
+    <p id="resultadoLoop"></p>
+  </section>
+
+  <section>
+    <h2>3. Tabuada (valor fixo 5)</h2>
+    <button onclick="tabuadaFixa()">Mostrar Tabuada</button>
+    <div id="tabuadaFixa"></div>
+  </section>
+
+  <section>
+    <h2>4. Tabuada (valor não fixo)</h2>
+    <input type="number" id="inputTabuada" placeholder="Digite um número">
+    <button onclick="tabuadaNaoFixa()">Mostrar Tabuada</button>
+    <div id="tabuadaNaoFixa"></div>
+  </section>
+
+  <section>
+    <h2>5. Calculadora</h2>
+    <input type="number" id="num1" placeholder="Digite o primeiro número">
+    <input type="number" id="num2" placeholder="Digite o segundo número">
+    <select id="operacao">
+      <option value="soma">+</option>
+      <option value="subtracao">-</option>
+      <option value="multiplicacao">*</option>
+      <option value="divisao">/</option>
+    </select>
+    <button onclick="calcular()">Calcular</button>
+    <p id="resultado"></p>
+  </section>
+
+  <section>
+    <h2>6. Valores Pares no Array</h2>
+    <button onclick="valoresPares()">Mostrar Pares</button>
+    <p id="resultadoArray"></p>
+  </section>
+
+  <section>
+    <h2>7. Custo de Carro</h2>
+    <label for="custoFabrica">Custo de Fábrica:</label>
+    <input type="number" id="custoFabrica">
+    <label for="percDistribuidor">% Distribuidor:</label>
+    <input type="number" id="percDistribuidor">
+    <label for="percImpostos">% Impostos:</label>
+    <input type="number" id="percImpostos">
+    <button onclick="calcularCusto()">Calcular</button>
+    <p id="valorFinal"></p>
+  </section>
+
+  <script>
+    // 1. Operações com Variáveis
+    function operacoesVariaveis() {
+      const valor1 = 10;
+      const valor2 = 100;
+
+      const soma = valor1 + valor2;
+      const subtracao = valor1 - valor2;
+      const multiplicacao = valor1 * valor2;
+      const divisao = valor1 / valor2;
+
+      alert(`Soma: ${soma}\nSubtração: ${subtracao}\nMultiplicação: ${multiplicacao}\nDivisão: ${divisao}`);
+    }
+
+    // 2. Loop de 10 a 100
+    function loopDezACem() {
+      var finalLoop = '';
+      for (let i = 10; i <= 100; i++) {
+        if(i != 100) {
+          finalLoop += (`${i}, `);
+        } else {
+          finalLoop += (`${i}.`);
+        }
+      }
+      const resultadoLoop = document.getElementById('resultadoLoop').innerText = finalLoop;
+    }
+
+    // 3. Tabuada (valor fixo 5)
+    function tabuadaFixa() {
+      const valor = 5;
+      const tabuadaFinal = [];
+      for (let i = 1; i <= 10; i++) {
+        tabuadaFinal.push(`${valor} x ${i} = ${valor * i}`);
+      }
+
+      const resultadoTabuada = document.getElementById('tabuadaFixa')
+      for (let i = 0; i < tabuadaFinal.length; i++) {
+        const paragraph = document.createElement('p');
+        paragraph.textContent = tabuadaFinal[i];
+        resultadoTabuada.appendChild(paragraph);
+      }
+    }
+
+    // 4. Tabuada (valor não fixo)
+    function tabuadaNaoFixa() {
+      const inputTabuada = document.getElementById('inputTabuada');
+      const valor = parseInt(inputTabuada.value);
+
+      const tabuadaFinal = [];
+      if (!isNaN(valor)) {
+        for (let i = 1; i <= 10; i++) {
+          tabuadaFinal.push(`${valor} x ${i} = ${valor * i}`)
+        }
+      } else {
+        resultadoTabuada.innerText = 'Por favor, digite um número válido.'
+      }
+
+      const resultadoTabuada = document.getElementById('tabuadaNaoFixa')
+      for (let i = 0; i < tabuadaFinal.length; i++) {
+        const paragraph = document.createElement('p');
+        paragraph.textContent = tabuadaFinal[i];
+        resultadoTabuada.appendChild(paragraph);
+      }
+    }
+
+    // 5. Calculadora
+    function calcular() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      const operacao = document.getElementById('operacao').value;
+      let resultado;
+
+      switch (operacao) {
+        case 'soma':
+          resultado = num1 + num2;
+          break;
+        case 'subtracao':
+          resultado = num1 - num2;
+          break;
+        case 'multiplicacao':
+          resultado = num1 * num2;
+          break;
+        case 'divisao':
+          resultado = num1 / num2;
+          break;
+        default:
+          console.log('Operação inválida.');
+          return;
+      }
+
+      document.getElementById('resultado').innerText = `Resultado: ${resultado}`;
+    }
+
+    // 6. Valores Pares no Array
+    function valoresPares() {
+      const array = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      const pares = array.filter(valor => valor % 2 === 0);
+      document.getElementById('resultadoArray').innerText = `Os valores pares no array são: ${pares}`;
+    }
+
+    // 7. Custo de Carro
+    function calcularCusto() {
+      const custoFabrica = parseFloat(document.getElementById('custoFabrica').value);
+      const percDistribuidor = parseFloat(document.getElementById('percDistribuidor').value);
+      const percImpostos = parseFloat(document.getElementById('percImpostos').value);
+
+      if (!isNaN(custoFabrica) && !isNaN(percDistribuidor) && !isNaN(percImpostos)) {
+        const valorFinal = custoFabrica + (custoFabrica * (percDistribuidor / 100)) + (custoFabrica * (percImpostos / 100));
+        document.getElementById('valorFinal').innerText = `Valor Final: R$ ${valorFinal.toFixed(2)}`;
+      } else {
+        console.log('Por favor, preencha todos os campos com valores numéricos.');
+      }
+    }
+  </script>
+</body>
+
+</html>
